@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 6.2023 Resource Definitions//EN" " ">
+<!--
+    PostgreSQL. Змініть User / Password / DatabaseName під свою БД.
+    JDBC-драйвер (postgresql-XX.jar) має лежати в <payara>/glassfish/domains/domain1/lib
+-->
+<resources>
+    <!-- pool name (change nuospool), for example java:app/db_pool-->
+    <jdbc-connection-pool name="nuospool"
+                          datasource-classname="org.postgresql.ds.PGSimpleDataSource"
+                          res-type="javax.sql.DataSource">
+
+        <!-- user name - login in Database -->
+        <property name="User" value="postgres"/>
+        <!-- password in Database -->
+        <property name="Password" value="1234"/>
+        <!-- server, port and database name -->
+        <property name="ServerName" value="localhost"/>
+        <property name="PortNumber" value="5432"/>
+        <property name="DatabaseName" value="bk9_lab_3"/>
+    </jdbc-connection-pool>
+    <!-- JNDI name of resource and name of the pool (change values for jndi-name and pool-name)-->
+    <jdbc-resource enabled="true" jndi-name="java:app/jdbc/nuos" object-type="user" pool-name="nuospool"/>
+</resources>

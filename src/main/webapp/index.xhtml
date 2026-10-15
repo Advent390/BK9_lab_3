@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces">
+<f:view>
+    <h:head>
+        <title>Index Page</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <div class="create-container">
+            <div class="cars-section">
+                <h:form id="cars-form">
+                    <h1>Car Table</h1>
+                    <p:dataTable value="#{carService.allCars}" var="c">
+                        <p:column>
+                            <f:facet name="header">№</f:facet>
+                            <h:outputText value="#{c.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Brand</f:facet>
+                            <h:outputText value="#{c.brand}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Model</f:facet>
+                            <h:outputText value="#{c.model}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Mileage, km</f:facet>
+                            <h:outputText value="#{c.mileage}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Price</f:facet>
+                            <h:outputText value="#{c.price}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Production Date</f:facet>
+                            <h:outputText value="#{c.productionDate}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">X</f:facet>
+                            <p:commandButton icon="pi pi-trash" styleClass="ui-button-danger"
+                                             action="#{carService.deleteCar(c.id)}" update="@form"/>
+
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Edit</f:facet>
+                            <p:commandButton value="Edit" action="#{carService.edit(c.id)}"
+                                             onclick="PF('edit-car').show()" update="edit-form"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+            <div class="create-section">
+                <h:form id="create-form">
+                    <h1>Create Car</h1>
+                    <h:panelGrid columns="1" cellpadding="3">
+
+                        <h:outputLabel value="Brand:" for="brand"/>
+                        <h:inputText id="brand" value="#{carService.car.brand}" required="true"/>
+
+                        <h:outputLabel value="Model:" for="model"/>
+                        <h:inputText id="model" value="#{carService.car.model}" required="true"/>
+
+                        <h:outputLabel value="Mileage, km:" for="mileage"/>
+                        <h:inputText id="mileage" value="#{carService.car.mileage}" required="true"/>
+
+                        <h:outputLabel value="Price:" for="price"/>
+                        <h:inputText id="price" value="#{carService.car.price}" required="true"/>
+
+                        <h:outputLabel value="Production Date:" for="productionDate"/>
+                        <h:inputText id="productionDate" value="#{carService.car.productionDate}" required="true">
+                            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                        </h:inputText>
+
+                        <p:commandButton action="#{carService.createCar}" value="Create Car"
+                                         styleClass="ui-button-primary" update="@form, cars-form"/>
+                    </h:panelGrid>
+                </h:form>
+            </div>
+        </div>
+
+        <p:dialog id="edit-dialog" header="Edit car" widgetVar="edit-car" showEffect="fade" closeOnEscape="true" closable="true"
+                  modal="true" width="400">
+            <h:form id="edit-form">
+                <h:outputLabel value="Brand: " for="edit-brand"/>
+                <h:inputText id="edit-brand" value="#{carService.editingCar.brand}"/>
+
+                <h:outputLabel value="Model: " for="edit-model"/>
+                <h:inputText id="edit-model" value="#{carService.editingCar.model}"/>
+
+                <h:outputLabel value="Mileage, km: " for="edit-mileage"/>
+                <h:inputText id="edit-mileage" value="#{carService.editingCar.mileage}"/>
+
+                <h:outputLabel value="Price: " for="edit-price"/>
+                <h:inputText id="edit-price" value="#{carService.editingCar.price}"/>
+
+                <h:outputLabel value="Production Date: " for="edit-productionDate"/>
+                <h:inputText id="edit-productionDate" value="#{carService.editingCar.productionDate}">
+                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                </h:inputText>
+
+                <p:commandButton value="Update" action="#{carService.updateCar}"
+                                 styleClass="ui-button-primary" update="edit-dialog, cars-form"/>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</f:view>
+</html>

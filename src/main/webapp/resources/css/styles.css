@@ -1,0 +1,42 @@
+
+h1,label,input {
+    margin: 0;
+    padding: 0;
+}
+
+
+.create-container {
+    width: 100%;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.cars-section {
+    margin: 0 auto;
+    padding: 20px 30px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.create-section {
+    margin: 0 auto;
+    padding: 20px 30px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08);
+    height: 500px;
+}
+
+#edit-form  {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#edit-form input {
+    margin-bottom: 10px;
+}
